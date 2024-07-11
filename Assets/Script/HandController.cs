@@ -6,6 +6,7 @@ using UnityEngine.Rendering;
 public class HandController : MonoBehaviour
 {
 
+    public static HandController instance;
     public Card[] cardsInHand;
     public List<Vector3> cardPositions = new List<Vector3>();
 
@@ -13,6 +14,7 @@ public class HandController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
         setCardPositions();
     }
 
@@ -39,8 +41,16 @@ public class HandController : MonoBehaviour
             cardsInHand[i].moveToPoint(cardPositions[i],minPos.rotation);
             //cardsInHand[i].gameObject.fi.sortingOrder = i + 5;
             // get child named "front" and set sorting order
-            cardsInHand[i].transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 100 - (i + 5);
-            cardsInHand[i].transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder = 100 - (i + 5);
+            cardsInHand[i].transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = (i + 5);
+            cardsInHand[i].transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder = (i + 5);
         }
+    }
+
+    public void addCardToHand(Card card)
+    {
+        List<Card> temp = new List<Card>(cardsInHand);
+        temp.Add(card);
+        cardsInHand = temp.ToArray();
+        setCardPositions();
     }
 }
