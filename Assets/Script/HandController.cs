@@ -38,6 +38,8 @@ public class HandController : MonoBehaviour
         for(int i=0;i<cardsInHand.Length;i++)
         {
             cardPositions.Add(minPos.position + distanceBetweenPoints * i);
+            
+            cardsInHand[i].handPosition = i;
             cardsInHand[i].moveToPoint(cardPositions[i],minPos.rotation);
             //cardsInHand[i].gameObject.fi.sortingOrder = i + 5;
             // get child named "front" and set sorting order
