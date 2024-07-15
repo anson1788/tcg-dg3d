@@ -15,7 +15,11 @@ public class Card : MonoBehaviour
     public float moveSpeed = 5f , rotateSpeed = 540f;
     void Start()
     {
-        
+        this.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        this.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
+        this.transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
+        this.transform.GetChild(0).GetChild(3).gameObject.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -44,7 +48,12 @@ public class Card : MonoBehaviour
         this.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = orginOrder1 + 200;
         this.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder = orginOrder2 + 200;
         moveToPoint(HandController.instance.cardPositions[handPosition] + new Vector3(0, 1, .5f), Quaternion.identity);
-      this.transform.GetChild(0).GetComponent<SpriteRenderer>().material = m_Material;
+        this.transform.GetChild(0).GetComponent<SpriteRenderer>().material = m_Material;
+        this.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+        this.transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
+        this.transform.GetChild(0).GetChild(2).gameObject.SetActive(true);
+        this.transform.GetChild(0).GetChild(3).gameObject.SetActive(true);
+
      }
 
     // Mouse exist Event , go back to original position
@@ -56,7 +65,12 @@ public class Card : MonoBehaviour
         this.transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder = orginOrder2 ;
         HandController.instance.setCardPositions();
         this.transform.GetChild(0).GetComponent<SpriteRenderer>().material = o_Material;
-   
+        
+        this.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        this.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
+        this.transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
+        this.transform.GetChild(0).GetChild(3).gameObject.SetActive(false);
+
         //moveToPoint(HandController.instance.cardPositions[handPosition], Quaternion.identity);
     }
 }
